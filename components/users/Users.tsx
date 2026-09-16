@@ -1,4 +1,4 @@
-export default function Usuarios() {
+export default function Users() {
   return (
     <section>
       <h1>Usuarios</h1>
