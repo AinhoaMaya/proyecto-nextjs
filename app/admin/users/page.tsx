@@ -6,13 +6,13 @@ export default function UsersPage() {
     <main className="p-6 flex flex-col gap-6 items-center">
       <h1 className="text-white">Gestión de Usuarios</h1>
 
-      <div className="flex w-full max-w-5xl border rounded overflow-hidden shadow-xl">
-        <div className="flex-1 bg-amber-50">
-          <Users />
-        </div>
-
-        <div className="flex-1 bg-[hsl(216_55%_53%)]">
+      <div className="flex g-10 overflow-hidden shadow-xl">
+        <div className="flex-1 bg-amber-50 p-3 border rounded-xl">
           <FormUsers />
+        </div>
+        
+        <div className="flex-1 bg-amber-50 p-3 border rounded-xl">
+          <Users />
         </div>
       </div>
     </main>
