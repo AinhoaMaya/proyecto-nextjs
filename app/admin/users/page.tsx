@@ -7,7 +7,7 @@ export default function UsersPage() {
       <h1 className="text-white">Gestión de Usuarios</h1>
 
       <div className="flex g-10 overflow-hidden shadow-xl">
-        <div className="flex-1 bg-amber-50 p-3 border rounded-xl">
+        <div className="flex-1 grid grid-cols-2 grid-rows-1 gap-2 bg-amber-50 p-3 border rounded-xl">
           <FormUsers />
         </div>
         
