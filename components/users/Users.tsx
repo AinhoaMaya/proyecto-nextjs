@@ -1,7 +1,24 @@
 import { Pencil, Trash2 } from "lucide-react";
-import users from "@/data/users.json";
 
-export default function Users() {
+type UsersProps = {
+  users: {
+    id: number;
+    name: string;
+    lastname: string;
+    email: string;
+  }[];
+  hasCreatedUser: boolean;
+};
+
+export default function Users({ users, hasCreatedUser }: UsersProps) {
+  if (!hasCreatedUser) {
+    return (
+      <section className="flex min-h-64 items-center justify-center rounded-2xl bg-white p-6 text-center shadow-lg">
+        <p className="text-sm text-slate-500">Rellena el formulario para crear un Usuario.</p>
+      </section>
+    );
+  }
+
   return (
     <section className="w-full overflow-hidden rounded-2xl bg-white shadow-lg">
       <div className="grid grid-cols-[1fr_1fr_2fr_auto] items-center gap-4 bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-700">

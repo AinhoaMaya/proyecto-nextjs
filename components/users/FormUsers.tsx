@@ -1,14 +1,37 @@
-export default function FormUsers() {
+"use client";
+
+type User = {
+  id: number;
+  name: string;
+  lastname: string;
+  email: string;
+};
+
+type FormUsersProps = {
+  onUserCreated: (user: User) => void;
+};
+
+export default function FormUsers({ onUserCreated }: FormUsersProps) {
   return (
     <section className="w-full rounded-2xl bg-white p-6 shadow-lg">
-      <form action="" className="flex flex-col gap-6">
+      <form
+        action={async (formData) => {
+          const response = await fetch("/api/users", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(Object.fromEntries(formData)),
+          });
+
+          if (!response.ok) {
+            return;
+          }
+
+          onUserCreated(await response.json());
+        }}
+        className="flex flex-col gap-6"
+      >
         <div className="flex flex-col gap-2">
-          <label
-            htmlFor="name"
-            className="text-sm font-medium text-slate-700"
-          >
-            Nombre
-          </label>
+          <label htmlFor="name" className="text-sm font-medium text-slate-700">Nombre</label>
 
           <input
             id="name"
@@ -19,12 +42,7 @@ export default function FormUsers() {
         </div>
 
         <div className="flex flex-col gap-2">
-          <label
-            htmlFor="lastname"
-            className="text-sm font-medium text-slate-700"
-          >
-            Apellidos
-          </label>
+          <label htmlFor="lastname" className="text-sm font-medium text-slate-700">Apellidos</label>
 
           <input
             id="lastname"
@@ -35,12 +53,7 @@ export default function FormUsers() {
         </div>
 
         <div className="flex flex-col gap-2">
-          <label
-            htmlFor="email"
-            className="text-sm font-medium text-slate-700"
-          >
-            Correo electrónico
-          </label>
+          <label htmlFor="email" className="text-sm font-medium text-slate-700">Correo electrónico</label>
 
           <input
             id="email"
