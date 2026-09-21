@@ -12,14 +12,6 @@ const links = [
     name: "Usuarios",
     href: "/admin/users",
   },
-  {
-    name: "Roles",
-    href: "/admin/roles",
-  },
-  {
-    name: "Configuración",
-    href: "/admin/settings",
-  },
 ];
 
 export default function NavLinks() {

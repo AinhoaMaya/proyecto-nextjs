@@ -3,15 +3,19 @@ import FormUsers from "@/components/users/FormUsers";
 
 export default function UsersPage() {
   return (
-    <main className="p-6 flex flex-col gap-6 items-center">
-      <h1 className="text-white">Gestión de Usuarios</h1>
+    <main className="flex min-h-screen flex-col gap-6 bg-slate-50 p-6">
+      <h1 className="text-2xl font-semibold text-slate-800">
+        Gestión de Usuarios
+      </h1>
 
-      <div className="flex g-10 overflow-hidden shadow-xl">
-        <div className="flex-1 grid grid-cols-2 grid-rows-1 gap-2 bg-amber-50 p-3 border rounded-xl">
+      <div className="flex w-full flex-col items-stretch gap-6 lg:flex-row">
+
+        <div className="w-full lg:w-80">
           <FormUsers />
         </div>
-        
-        <div className="flex-1 bg-amber-50 p-3 border rounded-xl">
+
+        {/* Tabla */}
+        <div className="min-w-0 flex-1">
           <Users />
         </div>
       </div>

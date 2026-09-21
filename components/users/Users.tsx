@@ -1,27 +1,35 @@
+import { Pencil, Trash2 } from "lucide-react";
+import users from "@/data/users.json";
+
 export default function Users() {
   return (
-    <section>
-      <div>
-        <button><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path d="M416.9 85.2L372 130.1L509.9 268L554.8 223.1C568.4 209.6 576 191.2 576 172C576 152.8 568.4 134.4 554.8 120.9L519.1 85.2C505.6 71.6 487.2 64 468 64C448.8 64 430.4 71.6 416.9 85.2zM338.1 164L122.9 379.1C112.2 389.8 104.4 403.2 100.3 417.8L64.9 545.6C62.6 553.9 64.9 562.9 71.1 569C77.3 575.1 86.2 577.5 94.5 575.2L222.3 539.7C236.9 535.6 250.2 527.9 261 517.1L476 301.9L338.1 164z"/></svg></button>
-        <button><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path d="M232.7 69.9L224 96L128 96C110.3 96 96 110.3 96 128C96 145.7 110.3 160 128 160L512 160C529.7 160 544 145.7 544 128C544 110.3 529.7 96 512 96L416 96L407.3 69.9C402.9 56.8 390.7 48 376.9 48L263.1 48C249.3 48 237.1 56.8 232.7 69.9zM512 208L128 208L149.1 531.1C150.7 556.4 171.7 576 197 576L443 576C468.3 576 489.3 556.4 490.9 531.1L512 208z"/></svg></button>
+    <section className="w-full overflow-hidden rounded-2xl bg-white shadow-lg">
+      <div className="grid grid-cols-[1fr_1fr_2fr_auto] items-center gap-4 bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-700">
+        <span>Nombre</span>
+        <span>Apellidos</span>
+        <span>Correo</span>
       </div>
 
-      <li className="flex flex-col gap-6 items-center">
-        <div className="flex gap-2">
-          <span>Nombre</span>
-          <span>aaaa</span>
-        </div>
+      <ul>
+        {users.map((user) => (
+          <li key={user.id} className="grid grid-cols-[1fr_1fr_2fr_auto] items-center gap-4 border-b border-slate-200 px-4 py-4 text-sm last:border-b-0">
+            <span className="text-slate-700">{user.name}</span>
 
-        <div className="flex gap-2">
-          <span>Apellidos</span>
-          <span>aaaa</span>
-        </div>
+            <span className="text-slate-700">{user.lastname}</span>
 
-        <div className="flex gap-2">
-          <span>Correo</span>
-          <span>aaaa</span>
-        </div>
-      </li>
+            <span className="truncate text-slate-600">{user.email}</span>
+
+            <div className="flex justify-end gap-3">
+              <button type="button" className="bg-transparent p-0 text-[#183153] transition-transform duration-200 hover:scale-105 hover:bg-transparent">
+                <Pencil size={24} />
+              </button>
+              <button type="button" className="bg-transparent p-0 text-[#183153] transition-transform duration-200 hover:scale-105 hover:bg-transparent">
+                <Trash2 size={24} />
+              </button>
+            </div>
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }
