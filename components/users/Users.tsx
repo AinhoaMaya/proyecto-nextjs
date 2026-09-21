@@ -11,7 +11,7 @@ type UsersProps = {
 };
 
 export default function Users({ users, hasCreatedUser }: UsersProps) {
-  if (!hasCreatedUser) {
+  if (!users.length) {
     return (
       <section className="flex min-h-64 items-center justify-center rounded-2xl bg-white p-6 text-center shadow-lg">
         <p className="text-sm text-slate-500">Rellena el formulario para crear un Usuario.</p>
