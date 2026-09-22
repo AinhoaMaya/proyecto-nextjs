@@ -5,17 +5,18 @@ import Users from "@/components/users/Users";
 import FormUsers from "@/components/users/FormUsers";
 import initialUsers from "@/data/users.json";
 
-type User = (typeof initialUsers)[number];
+type User = {
+  id: number;
+  name: string;
+  lastname: string;
+  email: string;
+};
 
 export default function UsersPage() {
   const [users, setUsers] = useState<User[]>(initialUsers);
-  const [editingUser, setEditingUser] = useState<User>();
+  const [editUser, setEditUser] = useState<User>();
 
-  const deleteUser = async (id: number) => {
-    if (!window.confirm("¿Quieres eliminar este usuario?")) {
-      return;
-    }
-
+  const onDeleteUser = async (id: number) => {
     const response = await fetch(`/api/users?id=${id}`, { method: "DELETE" });
 
     if (response.ok) {
@@ -33,22 +34,22 @@ export default function UsersPage() {
             onUserCreated={(user) => {
               setUsers((currentUsers) => [...currentUsers, user]);
             }}
-            editingUser={editingUser}
+            editUser={editUser}
             onUserUpdated={(updatedUser) => {
               setUsers((currentUsers) =>
                 currentUsers.map((user) => (user.id === updatedUser.id ? updatedUser : user)),
               );
-              setEditingUser(undefined);
+              setEditUser(undefined);
             }}
-            onCancelEdit={() => setEditingUser(undefined)}
+            onCancelEdit={() => setEditUser(undefined)}
           />
         </div>
 
         <div className="min-w-0 flex-1">
           <Users
             users={users}
-            onEdit={(id) => setEditingUser(users.find((user) => user.id === id))}
-            onDelete={deleteUser}
+            onEditUser={(id) => setEditUser(users.find((user) => user.id === id))}
+            onDeleteUser={onDeleteUser}
           />
         </div>
       </div>

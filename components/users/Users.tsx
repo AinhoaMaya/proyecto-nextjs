@@ -7,11 +7,11 @@ type UsersProps = {
     lastname: string;
     email: string;
   }[];
-  onEdit: (id: number) => void;
-  onDelete: (id: number) => void;
+  onEditUser: (id: number) => void;
+  onDeleteUser: (id: number) => void;
 };
 
-export default function Users({ users, onEdit, onDelete }: UsersProps) {
+export default function Users({ users, onEditUser, onDeleteUser }: UsersProps) {
   if (!users.length) {
     return (
       <section className="flex min-h-64 items-center justify-center rounded-2xl bg-white p-6 text-center shadow-lg">
@@ -40,13 +40,13 @@ export default function Users({ users, onEdit, onDelete }: UsersProps) {
             <div className="flex justify-end gap-3">
               <button
                 type="button"
-                onClick={() => onEdit(user.id)}
+                onClick={() => onEditUser(user.id)}
                 className="bg-transparent p-0 text-[#183153] transition-transform duration-200 hover:scale-105 hover:bg-transparent">
                 <Pencil size={24} />
               </button>
               <button
                 type="button"
-                onClick={() => onDelete(user.id)}
+                onClick={() => onDeleteUser(user.id)}
                 className="bg-transparent p-0 text-[#183153] transition-transform duration-200 hover:scale-105 hover:bg-transparent">
                 <Trash2 size={24} />
               </button>
