@@ -9,24 +9,30 @@ type User = {
 
 type FormUsersProps = {
   onUserCreated: (user: User) => void;
+  editingUser?: User;
+  onUserUpdated: (user: User) => void;
+  onCancelEdit: () => void;
 };
 
-export default function FormUsers({ onUserCreated }: FormUsersProps) {
+export default function FormUsers({ editingUser, onUserCreated, onUserUpdated, onCancelEdit }: FormUsersProps) {
   return (
     <section className="w-full rounded-2xl bg-white p-6 shadow-lg">
       <form
+        key={editingUser?.id ?? "new"}
         action={async (formData) => {
+          const userData = Object.fromEntries(formData);
           const response = await fetch("/api/users", {
-            method: "POST",
+            method: editingUser ? "PUT" : "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(Object.fromEntries(formData)),
+            body: JSON.stringify(editingUser ? { ...userData, id: editingUser.id } : userData),
           });
 
           if (!response.ok) {
             return;
           }
 
-          onUserCreated(await response.json());
+          const user = await response.json();
+          editingUser ? onUserUpdated(user) : onUserCreated(user);
         }}
         className="flex flex-col gap-6"
       >
@@ -37,6 +43,7 @@ export default function FormUsers({ onUserCreated }: FormUsersProps) {
             id="name"
             name="name"
             type="text"
+            defaultValue={editingUser?.name}
             className="w-full border-0 border-b border-slate-400 bg-transparent px-1 py-2 text-sm outline-none focus:border-blue-600"
           />
         </div>
@@ -48,6 +55,7 @@ export default function FormUsers({ onUserCreated }: FormUsersProps) {
             id="lastname"
             name="lastname"
             type="text"
+            defaultValue={editingUser?.lastname}
             className="w-full border-0 border-b border-slate-400 bg-transparent px-1 py-2 text-sm outline-none focus:border-blue-600"
           />
         </div>
@@ -59,16 +67,22 @@ export default function FormUsers({ onUserCreated }: FormUsersProps) {
             id="email"
             name="email"
             type="email"
+            defaultValue={editingUser?.email}
             className="w-full border-0 border-b border-slate-400 bg-transparent px-1 py-2 text-sm outline-none focus:border-blue-600"
           />
         </div>
 
         <div className="flex justify-end">
+          {editingUser && (
+            <button type="button" onClick={onCancelEdit} className="mr-3 h-10 rounded-lg px-4 text-sm text-slate-600">
+              Cancelar
+            </button>
+          )}
           <button
             type="submit"
             className="h-10 rounded-lg bg-[#183153] px-5 text-sm font-medium text-white transition-transform duration-200 hover:scale-105 hover:bg-[#28466F]"
           >
-            Guardar
+            {editingUser ? "Actualizar" : "Guardar"}
           </button>
         </div>
       </form>

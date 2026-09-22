@@ -7,24 +7,17 @@ type UsersProps = {
     lastname: string;
     email: string;
   }[];
-  hasCreatedUser: boolean;
+  onEdit: (id: number) => void;
+  onDelete: (id: number) => void;
 };
 
-export default function Users({ users, hasCreatedUser }: UsersProps) {
+export default function Users({ users, onEdit, onDelete }: UsersProps) {
   if (!users.length) {
     return (
       <section className="flex min-h-64 items-center justify-center rounded-2xl bg-white p-6 text-center shadow-lg">
         <p className="text-sm text-slate-500">Rellena el formulario para crear un Usuario.</p>
       </section>
     );
-  }
-
-  const editUser = (id: number) => {
-    
-  }
-
-  const deleteUser = (id: number) => {
-    
   }
 
   return (
@@ -47,19 +40,13 @@ export default function Users({ users, hasCreatedUser }: UsersProps) {
             <div className="flex justify-end gap-3">
               <button
                 type="button"
-                onClick={() => {
-                  editUser(user.id);
-                  console.log("id:", user.id);
-                }}
+                onClick={() => onEdit(user.id)}
                 className="bg-transparent p-0 text-[#183153] transition-transform duration-200 hover:scale-105 hover:bg-transparent">
                 <Pencil size={24} />
               </button>
               <button
                 type="button"
-                onClick={() => {
-                  deleteUser(user.id);
-                  console.log("id:", user.id);
-                }}
+                onClick={() => onDelete(user.id)}
                 className="bg-transparent p-0 text-[#183153] transition-transform duration-200 hover:scale-105 hover:bg-transparent">
                 <Trash2 size={24} />
               </button>

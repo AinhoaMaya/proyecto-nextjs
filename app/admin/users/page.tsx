@@ -9,7 +9,19 @@ type User = (typeof initialUsers)[number];
 
 export default function UsersPage() {
   const [users, setUsers] = useState<User[]>(initialUsers);
-  const [hasCreatedUser, setHasCreatedUser] = useState(false);
+  const [editingUser, setEditingUser] = useState<User>();
+
+  const deleteUser = async (id: number) => {
+    if (!window.confirm("¿Quieres eliminar este usuario?")) {
+      return;
+    }
+
+    const response = await fetch(`/api/users?id=${id}`, { method: "DELETE" });
+
+    if (response.ok) {
+      setUsers((currentUsers) => currentUsers.filter((user) => user.id !== id));
+    }
+  };
 
   return (
     <main className="flex min-h-screen flex-col gap-6 bg-slate-50 p-6">
@@ -20,13 +32,24 @@ export default function UsersPage() {
           <FormUsers
             onUserCreated={(user) => {
               setUsers((currentUsers) => [...currentUsers, user]);
-              setHasCreatedUser(true);
             }}
+            editingUser={editingUser}
+            onUserUpdated={(updatedUser) => {
+              setUsers((currentUsers) =>
+                currentUsers.map((user) => (user.id === updatedUser.id ? updatedUser : user)),
+              );
+              setEditingUser(undefined);
+            }}
+            onCancelEdit={() => setEditingUser(undefined)}
           />
         </div>
 
         <div className="min-w-0 flex-1">
-          <Users users={users} hasCreatedUser={hasCreatedUser} />
+          <Users
+            users={users}
+            onEdit={(id) => setEditingUser(users.find((user) => user.id === id))}
+            onDelete={deleteUser}
+          />
         </div>
       </div>
     </main>
