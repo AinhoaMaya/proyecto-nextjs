@@ -19,6 +19,14 @@ export default function Users({ users, hasCreatedUser }: UsersProps) {
     );
   }
 
+  const editUser = (id: number) => {
+    
+  }
+
+  const deleteUser = (id: number) => {
+    
+  }
+
   return (
     <section className="w-full overflow-hidden rounded-2xl bg-white shadow-lg">
       <div className="grid grid-cols-[1fr_1fr_2fr_auto] items-center gap-4 bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-700">
@@ -37,10 +45,22 @@ export default function Users({ users, hasCreatedUser }: UsersProps) {
             <span className="truncate text-slate-600">{user.email}</span>
 
             <div className="flex justify-end gap-3">
-              <button type="button" className="bg-transparent p-0 text-[#183153] transition-transform duration-200 hover:scale-105 hover:bg-transparent">
+              <button
+                type="button"
+                onClick={() => {
+                  editUser(user.id);
+                  console.log("id:", user.id);
+                }}
+                className="bg-transparent p-0 text-[#183153] transition-transform duration-200 hover:scale-105 hover:bg-transparent">
                 <Pencil size={24} />
               </button>
-              <button type="button" className="bg-transparent p-0 text-[#183153] transition-transform duration-200 hover:scale-105 hover:bg-transparent">
+              <button
+                type="button"
+                onClick={() => {
+                  deleteUser(user.id);
+                  console.log("id:", user.id);
+                }}
+                className="bg-transparent p-0 text-[#183153] transition-transform duration-200 hover:scale-105 hover:bg-transparent">
                 <Trash2 size={24} />
               </button>
             </div>
