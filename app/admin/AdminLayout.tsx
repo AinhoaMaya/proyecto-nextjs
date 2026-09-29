@@ -22,11 +22,11 @@ export default function AdminLayout({
         </h1>
 
         <div className="flex w-full flex-col items-stretch gap-6 lg:flex-row">
-          <div className="w-full lg:w-80">
+          <div className="min-w-0 flex-1">
             {form}
           </div>
 
-          <div className="min-w-0 flex-1">
+          <div className="w-full lg:w-80">
             {table}
           </div>
         </div>

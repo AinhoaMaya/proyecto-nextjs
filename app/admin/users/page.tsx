@@ -11,6 +11,8 @@ type User = {
   name: string;
   lastname: string;
   email: string;
+  createdAt?: string;
+  updatedAt?: string;
 };
 
 export default function UsersPage() {

@@ -7,6 +7,8 @@ type User = {
   name: string;
   lastname: string;
   email: string;
+  createdAt?: string;
+  updatedAt?: string;
 };
 
 const usersFile = path.join(process.cwd(), "data", "users.json");
@@ -22,11 +24,14 @@ export async function POST(request: Request) {
   }
 
   const users = JSON.parse(await fs.readFile(usersFile, "utf8")) as User[];
+  const timestamp = new Date().toISOString();
   const user = {
     id: users.reduce((highestId, currentUser) => Math.max(highestId, currentUser.id), 0) + 1,
     name,
     lastname,
     email,
+    createdAt: timestamp,
+    updatedAt: timestamp,
   };
 
   await fs.writeFile(usersFile, JSON.stringify([...users, user], null, 2) + "\n");
@@ -53,7 +58,14 @@ export async function PUT(request: Request) {
     return NextResponse.json({ error: "Usuario no encontrado" }, { status: 404 });
   }
 
-  const updatedUser = { id, name, lastname, email };
+  const updatedUser = {
+    id,
+    name,
+    lastname,
+    email,
+    createdAt: users[userIndex].createdAt,
+    updatedAt: new Date().toISOString(),
+  };
   users[userIndex] = updatedUser;
 
   await fs.writeFile(usersFile, JSON.stringify(users, null, 2) + "\n");

@@ -5,6 +5,8 @@ type User = {
   name: string;
   lastname: string;
   email: string;
+  createdAt?: string;
+  updatedAt?: string;
 };
 
 type FormUsersProps = {
@@ -36,31 +38,33 @@ export default function FormUsers({ editUser, onUserCreated, onUserUpdated, onCa
         }}
         className="flex flex-col gap-6"
       >
-        <div className="flex flex-col gap-2">
-          <label htmlFor="name" className="text-sm font-medium text-slate-700">Nombre</label>
+        <div className="grid grid-cols-2 gap-4">
+          <div className="flex min-w-0 flex-col">
+            <label htmlFor="name" className="text-sm font-medium text-slate-700">Nombre</label>
 
-          <input
-            id="name"
-            name="name"
-            type="text"
-            defaultValue={editUser?.name}
-            className="w-full border-0 border-b border-slate-400 bg-transparent px-1 py-2 text-sm outline-none focus:border-blue-600"
-          />
+            <input
+              id="name"
+              name="name"
+              type="text"
+              defaultValue={editUser?.name}
+              className="w-full border-0 border-b border-slate-400 bg-transparent px-1 py-2 text-sm outline-none focus:border-blue-600"
+            />
+          </div>
+
+          <div className="flex min-w-0 flex-col">
+            <label htmlFor="lastname" className="text-sm font-medium text-slate-700">Apellidos</label>
+
+            <input
+              id="lastname"
+              name="lastname"
+              type="text"
+              defaultValue={editUser?.lastname}
+              className="w-full border-0 border-b border-slate-400 bg-transparent px-1 py-2 text-sm outline-none focus:border-blue-600"
+            />
+          </div>
         </div>
 
-        <div className="flex flex-col gap-2">
-          <label htmlFor="lastname" className="text-sm font-medium text-slate-700">Apellidos</label>
-
-          <input
-            id="lastname"
-            name="lastname"
-            type="text"
-            defaultValue={editUser?.lastname}
-            className="w-full border-0 border-b border-slate-400 bg-transparent px-1 py-2 text-sm outline-none focus:border-blue-600"
-          />
-        </div>
-
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col">
           <label htmlFor="email" className="text-sm font-medium text-slate-700">Correo electrónico</label>
 
           <input
