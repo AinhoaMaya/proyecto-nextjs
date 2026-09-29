@@ -1,7 +1,5 @@
 import { ChevronLeft, ChevronRight, Pencil, Trash2 } from "lucide-react";
 
-
-
 type UsersProps = {
   users: {
     id: number;
@@ -27,21 +25,33 @@ export default function Users({ users, onEditUser, onDeleteUser }: UsersProps) {
       <ul>
         {users.map((user) => (
           <li key={user.id} className="flex flex-col gap-2 border-b border-slate-200 px-4 py-4 text-sm last:border-b-0">
-            <div className="flex shrink-0 gap-3 self-end">
-              <button
-                type="button"
-                onClick={() => onEditUser(user.id)}
-                aria-label={`Editar a ${user.name}`}
-                className="bg-transparent p-0 text-[#183153] transition-transform duration-200 hover:scale-105 hover:bg-transparent">
-                <Pencil size={24} />
-              </button>
-              <button
-                type="button"
-                onClick={() => onDeleteUser(user.id)}
-                aria-label={`Borrar a ${user.name}`}
-                className="bg-transparent p-0 text-[#183153] transition-transform duration-200 hover:scale-105 hover:bg-transparent">
-                <Trash2 size={24} />
-              </button>
+            <div className="flex justify-between">
+              <div className="flex items-center justify-center gap-4 border-slate-200">
+                <button type="button" aria-label="previous user" className="bg-transparent p-1 text-[#183153] hover:bg-transparent">
+                  <ChevronLeft size={20} />
+                </button>
+                <span className="text-sm text-slate-600">1 de {users.length}</span>
+                <button type="button" aria-label="next user" className="bg-transparent text-[#183153] hover:bg-transparent">
+                  <ChevronRight size={20} />
+                </button>
+              </div>
+
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => onEditUser(user.id)}
+                  aria-label={`Editar a ${user.name}`}
+                  className="bg-transparent p-0 text-[#183153] transition-transform duration-200 hover:scale-105 hover:bg-transparent">
+                  <Pencil size={24} />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => onDeleteUser(user.id)}
+                  aria-label={`Borrar a ${user.name}`}
+                  className="bg-transparent p-0 text-[#183153] transition-transform duration-200 hover:scale-105 hover:bg-transparent">
+                  <Trash2 size={24} />
+                </button>
+              </div>
             </div>
 
             <div className="flex min-w-0 flex-col gap-2">
@@ -50,15 +60,6 @@ export default function Users({ users, onEditUser, onDeleteUser }: UsersProps) {
               <span className="wrap-anywhere text-slate-600"><strong>Correo:</strong> {user.email}</span>
             </div>
 
-            <div className="flex items-center justify-center gap-4 border-t border-slate-200 px-4 py-3">
-              <button type="button" aria-label="previous user" className="bg-transparent p-1 text-[#183153] hover:bg-transparent">
-                <ChevronLeft size={20} />
-              </button>
-              <span className="text-sm text-slate-600">1 de {users.length}</span>
-              <button type="button" aria-label="next user" className="bg-transparent p-1 text-[#183153] hover:bg-transparent">
-                <ChevronRight size={20} />
-              </button>
-            </div>
           </li>
         ))}
       </ul>

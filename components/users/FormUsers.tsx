@@ -38,7 +38,7 @@ export default function FormUsers({ editUser, onUserCreated, onUserUpdated, onCa
         }}
         className="flex flex-col gap-6"
       >
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-8">
           <div className="flex min-w-0 flex-col">
             <label htmlFor="name" className="text-sm font-medium text-slate-700">Nombre</label>
 
