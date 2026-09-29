@@ -9,6 +9,10 @@ const links = [
     href: "/admin",
   },
   {
+    name: "Login",
+    href: "/admin/login",
+  },
+  {
     name: "Usuarios",
     href: "/admin/users",
   },
