@@ -3,6 +3,8 @@ import LoginComponent from "@/components/login/LoginComponent";
 export default function LoginPage() {
 
   return (
-    <LoginComponent />
+    <main className="flex items-center justify-center h-screen">
+        <LoginComponent/>
+    </main>
   );
 }
