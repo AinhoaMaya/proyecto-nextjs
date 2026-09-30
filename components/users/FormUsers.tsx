@@ -18,7 +18,7 @@ type FormUsersProps = {
 
 export default function FormUsers({ editUser, onUserCreated, onUserUpdated, onCancelEdit }: FormUsersProps) {
   return (
-    <section className="w-full rounded-2xl bg-white p-6 shadow-lg">
+    <section className="h-full w-full rounded-2xl bg-white p-6 shadow-lg">
       <form
         key={editUser?.id ?? "new"}
         action={async (formData) => {
