@@ -3,6 +3,8 @@
     "id": 1,
     "name": "hola",
     "lastname": "hola",
-    "email": "hola@gmail.com"
+    "email": "hola@gmail.com",
+    "createdAt": "2026-09-30T10:30:24.463Z",
+    "updatedAt": "2026-09-30T10:30:24.463Z"
   }
 ]
