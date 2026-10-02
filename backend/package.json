@@ -17,6 +17,7 @@
     "cors": "^2.8.6",
     "express": "^5.2.1",
     "graphql": "^16.14.2",
+    "graphql-tag": "^2.12.7",
     "sequelize": "^6.37.8"
   },
   "devDependencies": {
