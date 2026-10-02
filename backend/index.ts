@@ -9,18 +9,31 @@ const app = express();
 
 const PORT = 4000;
 
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-  })
-);
-
-app.use(express.json());
-
-app.get("/", (req, res) => {
-  res.send("Backend funcionando correctamente");
+const apolloServer = new ApolloServer({
+  typeDefs,
+  resolvers,
 });
 
-app.listen(PORT, () => {
-  console.log(`Backend funcionando en http://localhost:${PORT}`);
-});
+async function startServer() {
+  await apolloServer.start();
+
+  app.use(
+    cors({
+      origin: "http://localhost:3000",
+    })
+  );
+  
+  app.use(express.json());
+  
+  app.get("/", (req, res) => {
+    res.send("Backend funcionando correctamente");
+  });
+  
+  app.use("/graphql", expressMiddleware(apolloServer));
+  
+  app.listen(PORT, () => {
+    console.log(`Backend funcionando en http://localhost:${PORT}`);
+  });
+}
+
+startServer()
