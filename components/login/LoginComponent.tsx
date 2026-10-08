@@ -13,7 +13,7 @@ type LoginProps = {
 
 export default function LoginComponent() {
 // {onEnviarPassword, onRecoverPassword}: LoginProps
-  let title = 'Go Kart'
+  const title = 'Go Kart'
 
   return (
     <section className="w-150 rounded-2xl bg-white p-6 shadow-lg">

@@ -34,6 +34,7 @@ export default function FormUsers({ editUser, onUserCreated, onUserUpdated, onCa
           }
 
           const user = await response.json();
+          console.log("Usuario guardado:", user);
           editUser ? onUserUpdated(user) : onUserCreated(user);
         }}
         className="flex flex-col gap-6"
